@@ -1,9 +1,11 @@
-﻿using ConferenceMicroservice.Persistence.Entities;
+﻿using ConferenceMicroservice.Persistence.Configurations;
+using ConferenceMicroservice.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceMicroservice.Persistence
 {
-    public class ConferenceMicroserviceDbContext : DbContext
+    public class ConferenceMicroserviceDbContext(DbContextOptions<ConferenceMicroserviceDbContext> options) 
+        : DbContext(options)
     {
         public DbSet<ConferenceEntity> Conferences { get; set; }
         public DbSet<UserEntity> Users { get; set; }
@@ -15,5 +17,17 @@ namespace ConferenceMicroservice.Persistence
 
         public DbSet<PartyEntity> Parties { get; set; }
         public DbSet<UserConferenceEntity> UserConferences { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ChatConfiguration());
+            modelBuilder.ApplyConfiguration(new ConferenceConfiguration());
+            modelBuilder.ApplyConfiguration(new MessageConfiguration());
+            modelBuilder.ApplyConfiguration(new PartyConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConferenceConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
