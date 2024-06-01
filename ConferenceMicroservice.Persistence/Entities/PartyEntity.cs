@@ -1,20 +1,38 @@
 ﻿namespace ConferenceMicroservice.Persistence.Entities;
 
+//public class PartyEntity
+//{
+//    public Guid Id { get; set; }
+
+//    public DateTime DateTimeUserAdd { get; set; }
+
+//    // User part
+//    public Guid UserId { get; set; }
+//    public UserEntity? User { get; set; }
+
+//    //Chat part
+//    public Guid ChatId { get; set; }
+//    public ChatEntity? Chat { get; set; }
+
+//    // Message part
+//    public ICollection<MessageEntity> Messages { get; set; } = [];
+//}
+
 public class PartyEntity
 {
     public Guid Id { get; set; }
-    
+
     public DateTime DateTimeUserAdd { get; set; }
 
-    // User part
+    // Связь с UserEntity
     public Guid UserId { get; set; }
-    public UserEntity? User { get; set; }
+    public UserEntity User { get; set; } = null!;
 
-    //Chat part
+    // Связь с ChatEntity
     public Guid ChatId { get; set; }
-    public ChatEntity? Chat { get; set; }
+    public ChatEntity Chat { get; set; } = null!;
 
-    // Message part
+    // Коллекция сообщений
     public ICollection<MessageEntity> Messages { get; set; } = [];
 }
 

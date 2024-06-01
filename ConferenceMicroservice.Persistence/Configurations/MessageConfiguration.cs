@@ -16,5 +16,7 @@ public class MessageConfiguration : IEntityTypeConfiguration<MessageEntity>
         builder.HasOne(m => m.Party)
             .WithMany(p => p.Messages) // Название навигационного свойства в PartyEntity
             .HasForeignKey(m => m.PartyId); // Внешний ключ PartyId
+
+
     }
 }
