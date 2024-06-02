@@ -1,4 +1,6 @@
-﻿namespace ConferenceMicroservice.Persistence.Entities;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+namespace ConferenceMicroservice.Persistence.Entities;
 
 public class UserEntity
 {
@@ -7,6 +9,8 @@ public class UserEntity
     public string SecondName { get; set; } = string.Empty;
     public string ThirdName { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
 
     // Связь с OrganizationEntity
     public Guid OrganizationId { get; set; }
