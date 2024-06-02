@@ -4,9 +4,9 @@ namespace ConferenceMicroservice.API.Controllers
 {
     [ApiController]
     [Route("controller")]
-    public class ConferenceController : ControllerBase
+    public class ConferencesController : ControllerBase
     {
-        public ConferenceController()
+        public ConferencesController()
         {
             
         }

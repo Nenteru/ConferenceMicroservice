@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ConferenceMicroserviceDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString(nameof(ConferenceMicroserviceDbContext)));
 });
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUsersService, UserService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 var app = builder.Build();

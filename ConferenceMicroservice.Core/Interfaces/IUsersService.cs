@@ -2,7 +2,7 @@
 
 namespace ConferenceMicroservice.Core.Interfaces
 {
-    public interface IUserService
+    public interface IUsersService
     {
         Task AddToOrganizaiotn(Guid userId, Guid organizationId);
         Task AddUserToConference(Guid userId, Guid conferenceId);

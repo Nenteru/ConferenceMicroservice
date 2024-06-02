@@ -5,7 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace ConferenceMicroservice.Application.Services;
 
-public class UserService : IUserService
+public class UserService : IUsersService
 {
     private readonly IUsersRepository usersRepository;
 
