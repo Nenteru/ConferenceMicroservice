@@ -6,4 +6,4 @@ public record UsersRequest(
     string FirstName,
     string SecondName,
     string ThirdName,
-    string? PhoneNumber);
+    string PhoneNumber = "");

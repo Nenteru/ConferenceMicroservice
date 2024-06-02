@@ -6,7 +6,7 @@ namespace ConferenceMicroservice.Core.Models;
 
 public class User
 {
-    private User(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string? phoneNumber)
+    private User(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber)
     {
         Id = id;
         Email = email;
@@ -23,7 +23,7 @@ public class User
     public string FirstName { get; }
     public string SecondName { get; }
     public string ThirdName { get; }
-    public string? PhoneNumber { get; }
+    public string PhoneNumber { get; }
 
     // Связь с Organization
     public Organization? Organization { get; private set; }
@@ -34,7 +34,7 @@ public class User
     // Связь с Conference (для связи Многие-Ко-Многим через UserConferenceEntity)
     public ICollection<UserConference>? UserConferences { get; private set; }
 
-    public static Result<User> Create(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string? phoneNumber)
+    public static Result<User> Create(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(email))
         {
@@ -56,10 +56,6 @@ public class User
         {
             return Result.Failure<User>("Third name cannot be null or empty");
         }
-        //if (string.IsNullOrWhiteSpace(phoneNumber))
-        //{
-        //    return Result.Failure<User>("Phone number cannot be null or empty");
-        //}
 
         var user = new User(id, email, passwordHash, firstName, secondName, thirdName, phoneNumber);
 
