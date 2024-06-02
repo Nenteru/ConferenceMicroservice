@@ -70,7 +70,7 @@ public class UsersRepository : IUsersRepository
         return id;
     }
 
-    public async Task AddToConference(User userId, Guid conferenceId)
+    public async Task AddToConference(Guid userId, Guid conferenceId)
     {
         var conferenceEntity = await dbContext.Conferences.FindAsync(conferenceId)
             ?? throw new Exception();
@@ -79,6 +79,8 @@ public class UsersRepository : IUsersRepository
             ?? throw new Exception();
 
         dbContext.UserConferences.Add(new UserConferenceEntity { User = userEntity, Conference = conferenceEntity });
+
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task AddToOrganization(Guid userId, Guid organizationId)
@@ -90,5 +92,7 @@ public class UsersRepository : IUsersRepository
             ?? throw new Exception();
 
         userEntity.Organization = organizationEntity;
+
+        await dbContext.SaveChangesAsync();
     }
 }

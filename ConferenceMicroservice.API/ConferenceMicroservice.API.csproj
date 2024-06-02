@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConferenceMicroservice.Application\ConferenceMicroservice.Application.csproj" />
     <ProjectReference Include="..\ConferenceMicroservice.Persistence\ConferenceMicroservice.Persistence.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,10 @@
+using ConferenceMicroservice.Application.Services;
+using ConferenceMicroservice.Core.Interfaces;
+using ConferenceMicroservice.Persistence;
+using ConferenceMicroservice.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-using ConferenceMicroservice.Persistence;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -12,6 +16,9 @@ builder.Services.AddDbContext<ConferenceMicroserviceDbContext>(options =>
 {
     options.UseSqlServer(configuration.GetConnectionString(nameof(ConferenceMicroserviceDbContext)));
 });
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 var app = builder.Build();
 
