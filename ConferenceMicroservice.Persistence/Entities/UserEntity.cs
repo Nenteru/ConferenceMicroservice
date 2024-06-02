@@ -13,7 +13,7 @@ public class UserEntity
     public string PasswordHash { get; set; } = string.Empty;
 
     // Связь с OrganizationEntity
-    public Guid OrganizationId { get; set; }
+    public Guid? OrganizationId { get; set; }
     public OrganizationEntity? Organization { get; set; }
 
     // Связь с PartyEntity (для связи Многие-Ко-Многим с ChatEntity)

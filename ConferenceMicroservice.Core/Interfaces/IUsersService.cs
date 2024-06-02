@@ -6,7 +6,7 @@ namespace ConferenceMicroservice.Core.Interfaces
     {
         Task AddToOrganizaiotn(Guid userId, Guid organizationId);
         Task AddUserToConference(Guid userId, Guid conferenceId);
-        Task<Guid> CreateUser(string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber);
+        Task<Guid> CreateUser(User user);
         Task<Guid> DeleteUser(Guid id);
         Task<List<User>> GetAllUsers();
         Task<Guid> UpdateUser(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber);

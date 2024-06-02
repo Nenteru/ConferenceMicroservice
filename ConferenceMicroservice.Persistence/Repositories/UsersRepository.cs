@@ -27,7 +27,7 @@ public class UsersRepository : IUsersRepository
         return users;
     }
 
-    public async Task<Guid> Create(User user)
+    public async Task<Guid> Add(User user)
     {
         var userEntity = new UserEntity
         {

@@ -1,7 +1,5 @@
 ﻿using ConferenceMicroservice.Core.Interfaces;
 using ConferenceMicroservice.Core.Models;
-using CSharpFunctionalExtensions;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ConferenceMicroservice.Application.Services;
 
@@ -19,21 +17,9 @@ public class UserService : IUsersService
         return await usersRepository.Get();
     }
 
-    public async Task<Guid> CreateUser(string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber)
+    public async Task<Guid> CreateUser(User user)
     {
-        var user = User.Create(Guid.NewGuid(), email, passwordHash, firstName, secondName, thirdName, phoneNumber);
-
-        // Проверка результат вызова Create.
-        if (user.IsFailure)
-        {
-            //return Result.Failure<User>(user.Error);
-            throw new Exception();
-        }
-
-        await usersRepository.Create(user.Value);
-
-        //return Result.Success(user.Value);
-        return user.Value.Id;
+        return await usersRepository.Add(user);
     }
 
     public async Task<Guid> UpdateUser(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber)
