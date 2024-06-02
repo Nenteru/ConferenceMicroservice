@@ -4,7 +4,7 @@ namespace ConferenceMicroservice.Persistence.Entities;
 
 public class UserConferenceEntity
 {
-    public string File { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
 
     // Связь с UserEntity
     public Guid UserId { get; set; }
