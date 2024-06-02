@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConferenceMicroservice.Core\ConferenceMicroservice.Core.csproj" />
+  </ItemGroup>
+
 </Project>

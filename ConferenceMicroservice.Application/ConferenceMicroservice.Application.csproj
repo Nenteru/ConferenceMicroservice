@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\ConferenceMicroservice.Core\ConferenceMicroservice.Core.csproj" />
   </ItemGroup>
 
 </Project>
