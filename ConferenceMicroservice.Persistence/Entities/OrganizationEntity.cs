@@ -7,9 +7,9 @@ public class OrganizationEntity
     public string Number { get; set; } = string.Empty;
     public string Place { get; set; } = string.Empty;
 
-    // User part
-    public ICollection<UserEntity> Users { get; set; } = [];
+    // Связь с UserEntity
+    public ICollection<UserEntity>? Users { get; set; } = [];
 
-    // Divisions part
-    public ICollection<OrganizationDivisionEntity> Divisions { get; set; } = [];
+    // Связь с OrganizationDivisionEntity
+    public ICollection<OrganizationDivisionEntity>? Divisions { get; set; } = [];
 }

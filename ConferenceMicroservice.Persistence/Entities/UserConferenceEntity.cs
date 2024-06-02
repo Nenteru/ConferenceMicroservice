@@ -1,12 +1,10 @@
 ﻿
 
-using Microsoft.EntityFrameworkCore;
-
 namespace ConferenceMicroservice.Persistence.Entities;
 
 public class UserConferenceEntity
 {
-    public FileInfo? File { get; set; }
+    public string File { get; set; } = string.Empty;
 
     // Связь с UserEntity
     public Guid UserId { get; set; }

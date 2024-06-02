@@ -7,8 +7,7 @@ public class OrganizationDivisionEntity
     public string Number { get; set; } = string.Empty;
     public string Place { get; set; } = string.Empty;
 
-    // Organization part
+    // Связь с OrganizationEntity
     public Guid OrganizationId { get; set; }
-    public OrganizationEntity? Organization { get; set; }
-
+    public OrganizationEntity Organization { get; set; } = null!;
 }

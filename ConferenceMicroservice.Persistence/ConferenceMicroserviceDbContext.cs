@@ -26,6 +26,8 @@ namespace ConferenceMicroservice.Persistence
             modelBuilder.ApplyConfiguration(new PartyConfiguration());
             modelBuilder.ApplyConfiguration(new UserConferenceConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
+            modelBuilder.ApplyConfiguration(new OrganizationDivisionConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

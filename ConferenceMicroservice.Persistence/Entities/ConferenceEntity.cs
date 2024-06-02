@@ -1,7 +1,5 @@
 ﻿
 
-using System.Security.Cryptography.X509Certificates;
-
 namespace ConferenceMicroservice.Persistence.Entities;
 
 public class ConferenceEntity
@@ -13,5 +11,5 @@ public class ConferenceEntity
     public DateTime TimeEnd { get; set; }
 
     // Связь с UserEntity (для связи Многие-Ко-Многим через UserConferenceEntity)
-    public ICollection<UserConferenceEntity> UserConferences { get; set; } = [];
+    public ICollection<UserConferenceEntity>? UserConferences { get; set; } = [];
 }
