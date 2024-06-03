@@ -14,11 +14,13 @@ public class UserConferenceConfiguration : IEntityTypeConfiguration<UserConferen
 
         builder.HasOne(uc => uc.User)
             .WithMany(u => u.UserConferences)
-            .HasForeignKey(uc => uc.UserId);
+            .HasForeignKey(uc => uc.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(uc => uc.Conference)
             .WithMany(c => c.UserConferences)
-            .HasForeignKey(uc => uc.ConferenceId);
+            .HasForeignKey(uc => uc.ConferenceId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.UsePropertyAccessMode(PropertyAccessMode.Property);
     }

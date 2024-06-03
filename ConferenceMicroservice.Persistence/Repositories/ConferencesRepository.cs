@@ -35,8 +35,11 @@ public class ConferencesRepository : IConferencesRepository
         var userConferenceEntities = await dbContext.UserConferences
             .Where(uc => uc.ConferenceId == conferenceId).ToListAsync();
 
-        var userEntities = userConferenceEntities
-            .Select(uc => uc.User).ToList();
+        var userIds = userConferenceEntities.Select(uc => uc.UserId).ToArray();
+
+        var userEntities = await dbContext.Users
+            .Where(u => userIds.Contains(u.Id))
+            .ToListAsync();
 
         var users = userEntities
             .Select(u => User.Create(u.Id, u.Email, u.PasswordHash, u.FirstName, u.SecondName, u.ThirdName, u.PhoneNumber).Value)
