@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
     [HttpDelete("{userId:guid}/conferences/{conferenceId:guid}")]
     public async Task<ActionResult> DeleteFromConference(Guid userId, Guid conferenceId)
     {
-        await usersService.RemoveUserFromConference(userId, conferenceId);
+        await usersService.RemoveConferenceFromUser(userId, conferenceId);
 
         return Ok();
     }

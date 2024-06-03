@@ -27,14 +27,14 @@ public class UserService : IUsersService
         return await usersRepository.Update(id, email, passwordHash, firstName, secondName, thirdName, phoneNumber);
     }
 
-    public async Task<Guid> DeleteUser(Guid id)
+    public async Task<Guid> DeleteUser(Guid userId)
     {
-        return await usersRepository.Delete(id);
+        return await usersRepository.Delete(userId);
     }
 
     public async Task AddUserToConference(Guid userId, Guid conferenceId)
     {
-        await usersRepository.AddToConference(userId, conferenceId);
+        await usersRepository.AddConference(userId, conferenceId);
     }
 
     public async Task<List<Conference>> GetUserConferences(Guid userId)
@@ -42,14 +42,14 @@ public class UserService : IUsersService
         return await usersRepository.GetConferences(userId);
     }
 
-    public async Task RemoveUserFromConference(Guid userId, Guid conferenceId)
+    public async Task RemoveConferenceFromUser(Guid userId, Guid conferenceId)
     {
-        await usersRepository.RemoveFromConference(userId, conferenceId);
+        await usersRepository.RemoveConference(userId, conferenceId);
     }
 
     public async Task AddUserToOrganization(Guid userId, Guid organizationId)
     {
-        await usersRepository.AddToOrganization(userId, organizationId);
+        await usersRepository.AddOrganization(userId, organizationId);
     }
 }
 

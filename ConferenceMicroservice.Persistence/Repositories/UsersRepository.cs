@@ -1,4 +1,5 @@
-﻿using ConferenceMicroservice.Core.Interfaces;
+﻿using Azure.Core;
+using ConferenceMicroservice.Core.Interfaces;
 using ConferenceMicroservice.Core.Models;
 using ConferenceMicroservice.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -48,12 +49,12 @@ public class UsersRepository : IUsersRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Email == email) ?? throw new Exception();
 
-        return User.Create(userEntity.Id, 
-            userEntity.Email, 
-            userEntity.PasswordHash, 
-            userEntity.FirstName, 
-            userEntity.SecondName, 
-            userEntity.ThirdName, 
+        return User.Create(userEntity.Id,
+            userEntity.Email,
+            userEntity.PasswordHash,
+            userEntity.FirstName,
+            userEntity.SecondName,
+            userEntity.ThirdName,
             userEntity.PhoneNumber).Value;
     }
 
@@ -100,7 +101,7 @@ public class UsersRepository : IUsersRepository
         return id;
     }
 
-    public async Task AddToConference(Guid userId, Guid conferenceId)
+    public async Task<Guid> AddConference(Guid userId, Guid conferenceId)
     {
         var conferenceEntity = await dbContext.Conferences.FindAsync(conferenceId)
             ?? throw new Exception();
@@ -111,9 +112,11 @@ public class UsersRepository : IUsersRepository
         dbContext.UserConferences.Add(new UserConferenceEntity { User = userEntity, Conference = conferenceEntity });
 
         await dbContext.SaveChangesAsync();
+
+        return conferenceId;
     }
 
-    public async Task RemoveFromConference(Guid userId, Guid conferenceId)
+    public async Task<Guid> RemoveConference(Guid userId, Guid conferenceId)
     {
         var userConferenceEntity = await dbContext.UserConferences
             .Where(uc => uc.UserId == userId && uc.ConferenceId == conferenceId)
@@ -123,10 +126,12 @@ public class UsersRepository : IUsersRepository
         dbContext.UserConferences.Remove(userConferenceEntity);
 
         await dbContext.SaveChangesAsync();
+
+        return conferenceId;
     }
 
 
-    public async Task AddToOrganization(Guid userId, Guid organizationId)
+    public async Task<Guid> AddOrganization(Guid userId, Guid organizationId)
     {
         var organizationEntity = await dbContext.Organizations.FindAsync(organizationId)
             ?? throw new Exception();
@@ -137,5 +142,7 @@ public class UsersRepository : IUsersRepository
         userEntity.Organization = organizationEntity;
 
         await dbContext.SaveChangesAsync();
+
+        return organizationId;
     }
 }
