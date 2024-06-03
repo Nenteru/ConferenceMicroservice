@@ -4,8 +4,10 @@ namespace ConferenceMicroservice.Core.Interfaces
 {
     public interface IUsersService
     {
-        Task AddToOrganizaiotn(Guid userId, Guid organizationId);
+        Task<List<Conference>> GetUserConferences(Guid userId);
+        Task AddUserToOrganization(Guid userId, Guid organizationId);
         Task AddUserToConference(Guid userId, Guid conferenceId);
+        Task RemoveUserFromConference(Guid userId, Guid conferenceId);
         Task<Guid> CreateUser(User user);
         Task<Guid> DeleteUser(Guid id);
         Task<List<User>> GetAllUsers();

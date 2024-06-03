@@ -4,6 +4,7 @@ using ConferenceMicroservice.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConferenceMicroservice.Persistence.Migrations
 {
     [DbContext(typeof(ConferenceMicroserviceDbContext))]
-    partial class ConferenceMicroserviceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240603165209_ChangeConferenceEntity")]
+    partial class ChangeConferenceEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

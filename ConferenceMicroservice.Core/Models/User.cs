@@ -17,22 +17,22 @@ public class User
         PhoneNumber = phoneNumber;
     }
 
-    public string Email { get; }
-    public string PasswordHash { get; }
     public Guid Id { get; }
-    public string FirstName { get; }
-    public string SecondName { get; }
-    public string ThirdName { get; }
-    public string PhoneNumber { get; }
+    public string Email { get; private set; }
+    public string PasswordHash { get; private set; }
+    public string FirstName { get; private set; }
+    public string SecondName { get; private set; }
+    public string ThirdName { get; private set; }
+    public string PhoneNumber { get; private set; }
 
     // Связь с Organization
     public Organization? Organization { get; private set; }
 
     // Связь с Party (для связи Многие-Ко-Многим с ChatEntity)
-    public ICollection<Party>? Parties { get; private set; }
+    public ICollection<Party> Parties { get; private set; } = [];
 
     // Связь с Conference (для связи Многие-Ко-Многим через UserConferenceEntity)
-    public ICollection<UserConference>? UserConferences { get; private set; }
+    public ICollection<UserConference> UserConferences { get; private set; } = [];
 
     public static Result<User> Create(Guid id, string email, string passwordHash, string firstName, string secondName, string thirdName, string phoneNumber)
     {
@@ -62,6 +62,7 @@ public class User
         return Result.Success(user);
     }
 }
+
 
 public class Organization
 {

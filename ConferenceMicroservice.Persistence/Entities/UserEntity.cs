@@ -5,12 +5,12 @@ namespace ConferenceMicroservice.Persistence.Entities;
 public class UserEntity
 {
     public Guid Id { get; set; }
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
     public string SecondName { get; set; } = string.Empty;
     public string ThirdName { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string PasswordHash { get; set; } = string.Empty;
 
     // Связь с OrganizationEntity
     public Guid? OrganizationId { get; set; }

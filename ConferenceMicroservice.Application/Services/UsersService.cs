@@ -37,7 +37,17 @@ public class UserService : IUsersService
         await usersRepository.AddToConference(userId, conferenceId);
     }
 
-    public async Task AddToOrganizaiotn(Guid userId, Guid organizationId)
+    public async Task<List<Conference>> GetUserConferences(Guid userId)
+    {
+        return await usersRepository.GetConferences(userId);
+    }
+
+    public async Task RemoveUserFromConference(Guid userId, Guid conferenceId)
+    {
+        await usersRepository.RemoveFromConference(userId, conferenceId);
+    }
+
+    public async Task AddUserToOrganization(Guid userId, Guid organizationId)
     {
         await usersRepository.AddToOrganization(userId, organizationId);
     }

@@ -18,7 +18,7 @@ public class ConferencesRepository
     {
         return await dbContext.Conferences
             .AsNoTracking()
-            .OrderBy(c => c.TimeStart)
+            .OrderBy(c => c.DateTimeStart)
             .ToListAsync();
     }
     
@@ -26,7 +26,7 @@ public class ConferencesRepository
     {
         return await dbContext.Conferences
             .AsNoTracking()
-            .OrderBy(c => c.TimeStart)
+            .OrderBy(c => c.DateTimeStart)
             .Include(c => c.UserConferences)
             .ToListAsync();
     }
@@ -44,12 +44,12 @@ public class ConferencesRepository
 
         if(!(start == DateTime.MinValue))
         {
-            query = query.Where(c => c.TimeStart >= start);
+            query = query.Where(c => c.DateTimeStart >= start);
         }
 
         if (!(end == DateTime.MinValue))
         {
-            query = query.Where(c => c.TimeEnd <= end);
+            query = query.Where(c => c.DateTimeEnd <= end);
         }
 
         return await query.ToListAsync();
@@ -62,8 +62,8 @@ public class ConferencesRepository
             Id = id,
             Title = title, 
             Description = description, 
-            TimeStart = dateTimeStart, 
-            TimeEnd = dateTimeEnd
+            DateTimeStart = dateTimeStart, 
+            DateTimeEnd = dateTimeEnd
         };
 
         await dbContext.AddAsync(conferenceEntity);
@@ -77,8 +77,8 @@ public class ConferencesRepository
             .ExecuteUpdateAsync(s =>s
             .SetProperty(c => c.Title, title)
             .SetProperty(c => c.Description, description)
-            .SetProperty(c => c.TimeStart, dateTimeStart)
-            .SetProperty(c => c.TimeEnd, dateTimeEnd));
+            .SetProperty(c => c.DateTimeStart, dateTimeStart)
+            .SetProperty(c => c.DateTimeEnd, dateTimeEnd));
 
     }
     

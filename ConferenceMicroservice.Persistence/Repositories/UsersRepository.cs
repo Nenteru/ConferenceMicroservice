@@ -27,6 +27,36 @@ public class UsersRepository : IUsersRepository
         return users;
     }
 
+    public async Task<List<Conference>> GetConferences(Guid userId)
+    {
+        var userConferenceEntities = await dbContext.UserConferences
+            .Where(uc => uc.UserId == userId).ToListAsync();
+
+        var conferenceEntities = userConferenceEntities
+            .Select(uc => uc.Conference).ToList();
+
+        var conferences = conferenceEntities
+            .Select(c => Conference.Create(c.Id, c.Title, c.Description, c.DateTimeStart, c.DateTimeEnd).Value)
+            .ToList();
+
+        return conferences;
+    }
+
+    public async Task<User> GetByEmail(string email)
+    {
+        var userEntity = await dbContext.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Email == email) ?? throw new Exception();
+
+        return User.Create(userEntity.Id, 
+            userEntity.Email, 
+            userEntity.PasswordHash, 
+            userEntity.FirstName, 
+            userEntity.SecondName, 
+            userEntity.ThirdName, 
+            userEntity.PhoneNumber).Value;
+    }
+
     public async Task<Guid> Add(User user)
     {
         var userEntity = new UserEntity
@@ -82,6 +112,19 @@ public class UsersRepository : IUsersRepository
 
         await dbContext.SaveChangesAsync();
     }
+
+    public async Task RemoveFromConference(Guid userId, Guid conferenceId)
+    {
+        var userConferenceEntity = await dbContext.UserConferences
+            .Where(uc => uc.UserId == userId && uc.ConferenceId == conferenceId)
+            .FirstOrDefaultAsync()
+            ?? throw new Exception();
+
+        dbContext.UserConferences.Remove(userConferenceEntity);
+
+        await dbContext.SaveChangesAsync();
+    }
+
 
     public async Task AddToOrganization(Guid userId, Guid organizationId)
     {
