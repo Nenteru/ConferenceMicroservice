@@ -38,13 +38,27 @@ namespace ConferenceMicroservice.API.Controllers
                 request.ThirdName,
                 request.PhoneNumber);
 
-            if(user.IsFailure)
+            if (user.IsFailure)
             {
                 return BadRequest(user.Error);
             }
 
             var userId = await usersService.CreateUser(user.Value);
             return Ok(userId);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<Guid>> UpdateUser(Guid id, [FromBody] UsersRequest request)
+        {
+            var userId = await usersService.UpdateUser(id, request.Email, request.PasswordHash, request.FirstName, request.SecondName, request.ThirdName, request.PhoneNumber);
+
+            return Ok(userId);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<Guid>> DeleteUser(Guid id)
+        {
+            return Ok(await usersService.DeleteUser(id));
         }
     }
 }
