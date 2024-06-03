@@ -20,6 +20,9 @@ builder.Services.AddDbContext<ConferenceMicroserviceDbContext>(options =>
 
 builder.Services.AddScoped<IUsersService, UserService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IConferencesService, ConferencesService>();
+builder.Services.AddScoped<IConferencesRepository, ConferencesRepository>();
+
 
 var app = builder.Build();
 

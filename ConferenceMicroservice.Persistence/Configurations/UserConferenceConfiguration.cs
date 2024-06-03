@@ -19,5 +19,7 @@ public class UserConferenceConfiguration : IEntityTypeConfiguration<UserConferen
         builder.HasOne(uc => uc.Conference)
             .WithMany(c => c.UserConferences)
             .HasForeignKey(uc => uc.ConferenceId);
+
+        builder.UsePropertyAccessMode(PropertyAccessMode.Property);
     }
 }

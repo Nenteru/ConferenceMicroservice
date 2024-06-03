@@ -14,7 +14,12 @@ public class ConferencesService : IConferencesService
         this.conferencesRepository = conferencesRepository;
     }
 
-    public async Task<Guid> AddUserToConference(Guid conferenceId, Guid userId)
+    public async Task<List<User>> GetConferenceUsers(Guid conferenceId)
+    {
+        return await conferencesRepository.GetUsers(conferenceId);
+    }
+
+    public async Task<Guid> AddConferenceToUser(Guid conferenceId, Guid userId)
     {
         return await conferencesRepository.AddUser(conferenceId, userId);
     }

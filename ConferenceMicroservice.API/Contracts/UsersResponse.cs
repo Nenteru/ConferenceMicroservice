@@ -6,4 +6,4 @@ public record UsersResponse(
     string FirstName,
     string SecondName,
     string ThirdName,
-    string? PhoneNumber);
+    string PhoneNumber);

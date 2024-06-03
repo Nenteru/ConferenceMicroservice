@@ -19,32 +19,6 @@ public class UsersController : ControllerBase
         this.usersService = usersService;
     }
 
-    [HttpGet("{id:guid}/conferences")]
-    public async Task<ActionResult<List<Conference>>> GetConferences(Guid id)
-    {
-        var conferences = await usersService.GetUserConferences(id);
-
-        var response = conferences.Select(c => new ConferencesResponse(c.Id, c.Title, c.Descriptoin, c.DateTimeStart, c.DateTimeEnd));
-
-        return Ok(response);
-    }
-
-    [HttpPost("{userId:guid}/conferences/{conferenceId:guid}")]
-    public async Task<ActionResult> AddUserToConference(Guid userId, Guid conferenceId)
-    {
-        await usersService.AddUserToConference(userId, conferenceId);
-
-        return Ok(conferenceId);
-    }
-
-    [HttpDelete("{userId:guid}/conferences/{conferenceId:guid}")]
-    public async Task<ActionResult> DeleteFromConference(Guid userId, Guid conferenceId)
-    {
-        await usersService.RemoveConferenceFromUser(userId, conferenceId);
-
-        return Ok();
-    }
-
     [HttpGet]
     public async Task<ActionResult<List<UsersResponse>>> GetUsers()
     {
@@ -88,5 +62,31 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<Guid>> DeleteUser(Guid id)
     {
         return Ok(await usersService.DeleteUser(id));
+    }
+
+    [HttpGet("{id:guid}/conferences")]
+    public async Task<ActionResult<List<Conference>>> GetConferences(Guid id)
+    {
+        var conferences = await usersService.GetUserConferences(id);
+
+        var response = conferences.Select(c => new ConferencesResponse(c.Id, c.Title, c.Descriptoin, c.DateTimeStart, c.DateTimeEnd));
+
+        return Ok(response);
+    }
+
+    [HttpPost("{userId:guid}/conferences/{conferenceId:guid}")]
+    public async Task<ActionResult> AddUserToConference(Guid userId, Guid conferenceId)
+    {
+        var conferenceid = await usersService.AddUserToConference(userId, conferenceId);
+
+        return Ok(conferenceid);
+    }
+
+    [HttpDelete("{userId:guid}/conferences/{conferenceId:guid}")]
+    public async Task<ActionResult> RemoveConferenceFromUser(Guid userId, Guid conferenceId)
+    {
+        var conferenceid = await usersService.RemoveConferenceFromUser(userId, conferenceId);
+
+        return Ok(conferenceid);
     }
 }
