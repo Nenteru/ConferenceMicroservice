@@ -28,26 +28,6 @@ public class UsersRepository : IUsersRepository
         return users;
     }
 
-    
-
-    public async Task<List<User>> GetUsers(Guid conferenceId)
-    {
-        var userConferenceEntities = await dbContext.UserConferences
-            .Where(uc => uc.ConferenceId == conferenceId).ToListAsync();
-
-        var userIds = userConferenceEntities.Select(uc => uc.UserId).ToArray();
-
-        var userEntities = await dbContext.Users
-            .Where(u => userIds.Contains(u.Id))
-            .ToListAsync();
-
-        var users = userEntities
-            .Select(u => User.Create(u.Id, u.Email, u.PasswordHash, u.FirstName, u.SecondName, u.ThirdName, u.PhoneNumber).Value)
-            .ToList();
-
-        return users;
-    }
-
     public async Task<List<Conference>> GetConferences(Guid userId)
     {
         var userConferenceEntities = await dbContext.UserConferences

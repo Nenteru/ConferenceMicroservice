@@ -75,7 +75,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("{userId:guid}/conferences/{conferenceId:guid}")]
-    public async Task<ActionResult> AddUserToConference(Guid userId, Guid conferenceId)
+    public async Task<ActionResult<Guid>> AddUserToConference(Guid userId, Guid conferenceId)
     {
         var conferenceid = await usersService.AddUserToConference(userId, conferenceId);
 
@@ -83,7 +83,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{userId:guid}/conferences/{conferenceId:guid}")]
-    public async Task<ActionResult> RemoveConferenceFromUser(Guid userId, Guid conferenceId)
+    public async Task<ActionResult<Guid>> RemoveConferenceFromUser(Guid userId, Guid conferenceId)
     {
         var conferenceid = await usersService.RemoveConferenceFromUser(userId, conferenceId);
 

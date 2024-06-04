@@ -11,7 +11,6 @@ namespace ConferenceMicroservice.Persistence
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<OrganizationEntity> Organizations { get; set; }
         public DbSet<OrganizationDivisionEntity> Divisions { get; set; }
-
         public DbSet<ChatEntity> Chats { get; set; }
         public DbSet<MessageEntity> Messages { get;set; }
 
